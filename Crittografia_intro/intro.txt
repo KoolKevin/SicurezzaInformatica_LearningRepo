@@ -1,0 +1,156 @@
+PROPRIETà PER SICUREZZA DELLE INFORMAZIONI
+    ● Confidentiality (riservatezza)
+    ● Integrity (integrità)
+        - Authenticity (paternità)
+    ● Availability (disponibilità)
+
+In un mondo ideale un mittene che manda un messaggio ad un ricevente, lo fa attraverso un canale sicure che mantiene
+le caratteristiche sopra menzionate.
+Nel mondo reale tuttavia attacanti(eavesdropper/impostor) possono violare per esempio riservatezza o integrità.
+
+SOLUZIONE: CRITTOGRAFIA
+Un'elaborazione matematica e algoritmica della codifica delle informazioni.
+Ha due obbiettivi:
+    ● Prevenire la violazione della riservatezza (una rilevazione a posteriori sarebbe inefficace!):
+        -> alterare il codice in modo da renderlo incomprensibile a chi non ha diritto di apprendere le informazioni
+    ● Rilevare la violazione dell'integrità e autenticità (non può essere prevenuta!)
+        -> aggiungere al codice elementi che permettano la verifica delle informazioni ricevute
+
+TECNICHE PER LA REALIZZAZIONE DELLE PRIMITIVE
+Fanno riferimento ai metodi e agli approcci utilizzati per implementare le primitive crittografiche.
+Le primitive crittografiche sono gli elementi di base utilizzati per costruire sistemi crittografici complessi.
+
+Nella figura in slide 5, queste tecniche sono suddivise in varie categorie e sottocategorie:
+
+    Crittografia
+        Cifrari
+            Moderni
+                Algoritmi pubblici
+                    A doppia chiave (crittografia asimmetrica)
+                    A singola chiave (crittografia simmetrica)
+                Algoritmi segreti
+            Classici
+        Codici
+    Steganografia
+
+ad alto livello:
+    Crittografia: Studio delle tecniche per proteggere le informazioni.
+        Cifrari: Metodi per trasformare testo leggibile in testo cifrato.
+            Moderni: Utilizzano tecniche avanzate e sono suddivisi in:
+                Algoritmi pubblici: Utilizzano chiavi pubbliche e private.
+                    A doppia chiave: Sistema di chiavi asimmetriche (es. RSA).
+                    A singola chiave: Sistema di chiavi simmetriche (es. AES).
+                Algoritmi segreti: La sicurezza si basa sulla segretezza dell'algoritmo.
+            Classici: Metodi storici di cifratura (es. cifrario di Cesare).
+        Codici: Sistemi di codifica per rappresentare informazioni (es. codice Morse).
+    Steganografia: Tecniche per nascondere l'esistenza delle informazioni.
+
+STEGANOGRAFIA
+L’arte e la scienza del comunicare senza che altri se ne accorgano.
+Esempi storici:
+    ● La tavoletta cerata di Demerato
+    ● Lo schiavo "rapato" di Istieo
+    ● Gli inchiostri invisibili
+Tecniche moderne:
+    ● Modifica dei bit meno significativi di dati multimediali
+
+CIFRARI PER LA RISERVATEZZA
+Due operazioni
+    ● Cifratura: converte il testo in chiaro in testo cifrato (funzione C)
+    ● Decifrazione: converte il testo cifrato in testo in chiaro (funzione D)
+
+CHIAVI CRITTOGRAFICHE
+Una chiave crittografica è un valore (tipicamente una sequenza di bit) utilizzato all'interno di un algoritmo crittografico per
+cifrare/decifrare i dati. Le funzioni C e D dipendono dal messaggio e da una chiave.
+
+CODICI
+Sostituzione di stringhe
+    ● Tipicamente parole
+Limitato dal dizionario
+    ● Capacità espressive ridotte
+    ● Complessità di rappresentazione del codice
+
+///////////// CHAT-GPT: CHE DIFFERENZA C'è TRA CIFRARI E CODICI? /////////////
+La differenza principale tra cifrari e codici risiede nel modo in cui trasformano le informazioni
+e nella granularità delle unità di informazione che manipolano. Vediamo in dettaglio:
+
+CIFRARI
+Scopo: Garantire la riservatezza delle informazioni.
+Operazioni:
+    Cifratura: Converte il testo in chiaro in testo cifrato utilizzando una funzione matematica (funzione C).
+    Decifrazione: Converte il testo cifrato in testo in chiaro utilizzando una funzione inversa (funzione D).
+Granularità: Lavorano a livello di singoli caratteri, bit o blocchi di dati.
+Esempi: AES (Advanced Encryption Standard), RSA (Rivest-Shamir-Adleman), cifrario di Cesare.
+Vantaggi:
+    Alta sicurezza se utilizzati correttamente.
+    Possono essere usati per cifrare interi messaggi di lunghezza variabile.
+Svantaggi:
+    Necessitano di chiavi crittografiche.
+    Possono essere complessi da implementare e gestire.
+
+CODICI
+Scopo: Sostituire parti di testo con altre stringhe per scopi di comunicazione, segretezza o compressione.
+Operazioni:
+    Sostituzione: Rimpiazza stringhe di testo (tipicamente parole) con altre stringhe predefinite.
+Granularità: Lavorano a livello di parole o frasi intere.
+Esempi: Codice Morse, codice ASCII, codici utilizzati in telegrafia.
+Vantaggi:
+    Facilità di implementazione.
+    Utili per rappresentazioni specifiche e compatte di informazioni.
+Svantaggi:
+    Limitati da un dizionario predefinito.
+    Capacità espressive ridotte.
+    Complessità nella rappresentazione di concetti non presenti nel dizionario.
+
+DIFFERENZE
+Unità di Trasformazione:
+    Cifrari: Operano su singoli caratteri o blocchi di dati.
+    Codici: Operano su parole o frasi intere.
+Metodo di Trasformazione:
+    Cifrari: Utilizzano algoritmi matematici per la trasformazione.
+    Codici: Utilizzano sostituzioni predefinite basate su un dizionario.
+Flessibilità e Sicurezza:
+    Cifrari: Possono offrire un alto livello di sicurezza se ben progettati e implementati.
+    Codici: Meno sicuri e flessibili, poiché dipendono da un dizionario limitato e facilmente comprensibile una volta noto.
+Applicazioni:
+    Cifrari: Usati principalmente per garantire la riservatezza e l'integrità dei dati.
+    Codici: Usati storicamente per comunicazioni sicure e per la compressione dei dati, ma non forniscono lo stesso livello
+            di sicurezza dei cifrari.
+
+In sintesi, mentre i cifrari sono strumenti crittografici potenti e flessibili per proteggere le informazioni
+a livello di carattere o bit, i codici sono più semplici, basati su sostituzioni predefinite e limitati dalla capacità 
+del dizionario utilizzato.
+//////////////////////////////////////////////////////////////
+
+ALGORITMI SEGRETI
+Rappresentano una possibilità di rendere irrealizzabile D (decifrazione)
+Benefici apparenti: difficoltà di studiare come invertire la cifratura
+Problemi:
+    ● mancanza di revisione della qualità
+    ● difficoltà di diffusione delle procedure
+    ● difficoltà di sostituzione delle procedure
+
+I PRINCIPI DI KERCKHOFFS (1883)
+    1) Il sistema deve essere materialmente, se non matematicamente, indescifrabile.
+        ● Sicurezza computazionale o assoluta
+            - Sicurezza computazionale: Significa che il sistema è sicuro contro gli attacchi pratici con le risorse computazionali
+            attualmente disponibili.
+            Anche se teoricamente potrebbe essere decifrato, richiederebbe un tempo computazionale così elevato da essere impraticabile.
+            - Sicurezza assoluta: Indica che il sistema è matematicamente indescifrabile, ovvero non può essere compromesso
+            indipendentemente dalle risorse computazionali disponibili.
+
+    2) Non deve richiedere il segreto e deve poter cadere nelle mani del nemico senza inconvenienti
+        ● segreto!=algoritmo => segreto=chiave!
+            - Un sistema crittografico non deve dipendere dalla segretezza dell'algoritmo per la sua sicurezza.
+            Questo principio è conosciuto come il Principio di Kerckhoffs.
+            - La sicurezza del sistema deve essere basata esclusivamente sulla segretezza della chiave crittografica, non sull'algoritmo stesso.
+            Se l'algoritmo venisse scoperto dall'attaccante, il sistema rimarrebbe comunque sicuro purché la chiave rimanga segreta.  
+
+    3) La chiave deve poter essere comunicata e memorizzata senza l'ausilio di note scritte, e deve poter essere cambiata o modificata
+       a discrezione dei corrispondenti.
+        ● Cifratura = ricordare un segreto semplice per poter scambiare molti segreti arbitrari
+            - Comunicazione e memorizzazione della chiave: La chiave crittografica deve poter essere trasmessa e ricordata facilmente
+            dai corrispondenti senza bisogno di annotarla su supporti fisici, per ridurre il rischio di compromissione.
+            - Flessibilità della chiave: La chiave deve poter essere cambiata o modificata facilmente in caso di necessità, consentendo
+            ai corrispondenti di mantenere la sicurezza delle loro comunicazioni anche in caso di sospetto che la chiave possa
+            essere stata compromessa.

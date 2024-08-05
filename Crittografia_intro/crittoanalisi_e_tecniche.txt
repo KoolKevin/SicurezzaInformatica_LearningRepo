@@ -1,0 +1,63 @@
+METODI DELLA CRITTOANALISI
+A seconda del materiale a disposizione del crittanalista si possono avere diverse opportunità di attacco
+    ➲ Forza bruta
+        ● Si tira ad indovinare D (o il suo particolare segreto) e si decifra il testo intercettato: se non ha alcun senso
+        si ripete il procedimento
+    ➲ Solo testo cifrato
+        ● Si eseguono analisi statistiche su una grande quantità di materiale cifrato e se ne usano le indicazioni
+        per individuare quale p(plain text) probabilmente corrisponde ad un dato c(testo cifrato)
+    ➲ Testo in chiaro noto
+        ● Ci si procura in qualche modo sia dei testi cifrati, sia i corrispondenti testi in chiaro e si cerca di dedurre D
+        analizzando le varie coppie
+    ➲ Testo scelto
+        ● Si può scegliere testo da cifrare o da far decifrare per ottimizzare il procedimento di deduzione della chiave
+    ➲ Rubber hose
+        ● Si minaccia, ricatta o tortura qualcuno finché non cede la chiave.
+
+DI FRONTE A UN TESTO CIFRATO CON ALGORITMO NOTO, COSA PUò SEMPRE FARE UN CRITTOANALISTA?
+    ● Analizzare le proprietà statistiche del testo
+        → ROBUSTEZZA = capacità dell'algoritmo di occultare le proprietà del testo in chiaro
+    ● Cercare la chiave tra tutte quelle possibili
+        → sicurezza assoluta = rendere totalmente indistinguibile la chiave giusta dalle altre
+        → sicurezza computazionale = rendere troppo oneroso il processo di ricerca della chiave
+
+MATTONI DELLA ROBUSTEZZA 
+    ● CONFUSIONE
+    La proprietà di confusione misura il grado in cui la struttura della chiave viene resa irriconoscibile nel testo cifrato.
+        - Una modifica di un singolo elemento della chiave dovrebbe riflettersi sul 50% del testo cifrato
+        - L’analisi del testo cifrato non restituisce indicazioni utili sul valore della chiave
+    ● DIFFUSIONE
+    La proprietà di diffusione misura il grado in cui le proprietà statistiche degli elementi del testo in chiaro vengono sparse
+    sugli elementi del testo cifrato.
+        - Una modifica di un singolo elemento del testo in chiaro dovrebbe alterare il 50% del testo cifrato
+        - L’analisi del testo cifrato non restituisce indicazioni utili sul testo in chiaro
+
+
+--- TECNICHE CRITTOGRAFICHE
+
+SOSTITUZIONE MONOALFABETICA
+La sostituzione è il modo più semplice di introdurre confusione! (es. Cifrario di Cesare)
+Si sostituisce ad una lettera una corrispondente!
+    -> Ricerca della chiave: spazio di 26! ≈ 4*1026 ≈ 2
+
+Robustezza? 
+Nel linguaggio naturale, un attacco alla sostituzione è estremamente facile con le statistiche di frequenza dei caratteri
+(i.e. per la lingua inglese e=14%).
+
+Nel mondo binario, la “lettera” può essere un lungo blocco di bit
+    → frequenze basse e uniformi (compressione)
+    → buona efficacia!
+
+SOSTITUZIONE POLIALFABETICA (non riportata)
+
+TRASPOSIZIONE
+La trasposizione è il modo più semplice di introdurre diffusione!
+Algoritmicamente basta una tabella scritta per colonne e letta per righe.
+
+● Ricerca della chiave
+    - dimensione della tabella
+    - ordine di lettura delle righe
+● Robustezza
+    - Statistiche dei digrammi e trigrammi
+        - Permettono di dedurre la dimensione della tabella
+    - Per nulla banale se applicata ripetutamente

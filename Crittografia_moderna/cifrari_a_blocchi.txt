@@ -1,0 +1,89 @@
+CIFRARI A BLOCCHI
+Partendo dai cifrari classici:
+    ➲ Osservazioni di base sull’input
+        ● È utile ridurre a priori la riconoscibilità statistica dei simboli dell’alfabeto
+            - Aumentandone il numero (frequenza media = 1/N)
+                → facile se prendo come “lettera” un BLOCCO di bit per esempio 8 ma anche 16, 32, 64...
+        ● Rendendoli equiprobabili (compressione)
+    ➲ Osservazioni di base sull’algoritmo
+        ● Ogni operazione di sostituzione e trasposizione aumenta la confusione e la diffusione
+            - CIFRARI COMPOSTI  
+                -> Un round sostituisce e traspone
+                -> Tanti round incrementano l’effetto
+                -> La parte difficile è implementare E(encryption) e D(decryption) “modularmente” per poter lavorare
+                   liberamente sul numero di round
+
+esempio: Cifrari di Feistel (guarda per conto tuo, da slide non si capisce)
+
+AES
+Standard attuale: FIPS 197 “Advanced Encryption Standard” (Rijndael)
+Non usa la struttura di Feistel ma l’aritmetica dei campi finiti.
+    ➲ Blocchi di 128 bit
+    ➲ Può utilizzare chiavi di lunghezza diversa
+        ● 128 bit
+        ● 192 bit
+        ● 256 bit
+
+FUNZIONI HASH
+Gli stessi principi dei cifrari a blocchi possono essere usati senza chiave per ottenere “impronte digitali” compatte di documenti
+di dimensione arbitraria
+
+Fingerprint:
+    ● dimensione fissa (f. funzione di hash non biunivoca)
+    ● f. pubblica, senza chiave
+
+Funzioni hash crittografiche – robuste se:
+1) Non si può trovare un documento che abbia un dato fingerprint  (proprietà di unidirezionalità, o one-way)
+2) Non si può trovare una coppia di documenti con lo stesso fingerprint (proprietà di assenza di collisioni, o collision-free)
+
+Utilità delle funzioni hash
+➲ Integrità (checksum)
+    -> OK contro alterazioni accidentali
+    -> NON OK contro man in the middle attack. L'attaccante può sostituire il messaggio e fornire il relativo hash.
+
+Esempi di scenari di utilizzo di FUNZIONI HASH
+1. Verifica dell'integrità dei dati
+    Le funzioni hash sono utilizzate per garantire che i dati non siano stati alterati. Ad esempio:
+        - Download di file: Quando scarichi un file, il sito spesso fornisce anche l'hash del file. Dopo il download, puoi calcolare l'hash
+        del file scaricato e confrontarlo con l'hash fornito. Se coincidono, puoi essere certo che il file non è stato corrotto o modificato.
+        - Trasmissione dei dati: Durante la trasmissione di dati su reti insicure, l'hash dei dati viene inviato insieme ai dati stessi.
+        Il destinatario può calcolare l'hash dei dati ricevuti e confrontarlo con l'hash trasmesso per verificare che i dati 
+        non siano stati alterati durante la trasmissione.
+
+2. Memorizzazione sicura delle password
+    Le password degli utenti non vengono memorizzate direttamente nei database per motivi di sicurezza. 
+    Invece, viene memorizzato l'hash della password. Quando un utente inserisce la password per autenticarsi:
+    L'hash della password inserita viene calcolato e confrontato con l'hash memorizzato. Se coincidono, l'autenticazione ha successo.
+    Questo approccio protegge le password anche se il database viene compromesso.
+
+3. Firma digitale e certificati
+Le funzioni hash sono utilizzate nelle firme digitali per garantire l'integrità e l'autenticità dei messaggi e dei documenti:
+    Un documento viene hashato, e l'hash risultante viene cifrato con la chiave privata del mittente per creare la firma digitale.
+    Il destinatario può decifrare la firma con la chiave pubblica del mittente e confrontare l'hash ottenuto con l'hash del documento ricevuto
+    per verificare l'integrità e l'autenticità del documento. 
+
+ATTACCHI A FUNZIONI HASH
+➲ Attacchi a one-way property
+    ● Ricerca di difetti nell’algoritmo
+        - Improbabile
+    ● Forza bruta
+        - Generare documenti a caso e vedere se hanno la fingerprint cercata
+            -> Tempo crescente esponenzialmente con la lunghezza dell’impronta
+    ● Famiglie più diffuse
+        - MD5 (128 bit), MD6 (fino a 512 bit)
+        - RIPEMD (128, 160,320 bit)
+        - SHA (160, 224,256,384,512) / SHA-3 (arbitraria)
+        
+➲ Attacchi a collision-free
+    ● Ricerca di difetti nell’algoritmo
+        - Trovati! SHA-1 (2005), MD5 (2008)
+    ● Birthday attack (paradosso del compleanno)
+        - Dimensione di un gruppo per avere probabilità >50% che ci sia un compleanno in una data specifica?
+            -> P_non_compleanno = 364/365; in gruppo di N, P_nessun_compleanno = (364/365)^n
+            -> P < 0.5 → N > 253
+        - Dimensione di un gruppo per avere probabilità >50% che due membri compiano gli anni lo stesso giorno?
+            -> Per singola coppia di persone, stesso calcolo
+            -> Ma vale per N coppie! Con M persone compongo M*(M-1)/N coppie
+            -> Bastano circa M=sqrt(2N) persone => 23
+        - Per un hash di m bit, la dimensione del set è 2m
+        - Per trovare una coppia di documenti con lo stesso hash bastano 2^m/2 tentativi!
